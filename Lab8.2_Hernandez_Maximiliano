@@ -1,0 +1,934 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/MaxHV00/Hernandez-Vizcarra-Maximiliano-structured-programming/blob/main/Lab8_Hernandez_Maximiliano.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Structured Programming\n",
+        "\n",
+        "## Lab 8. Subprograms and Recursion\n",
+        "\n",
+        "### Learning Objectives\n",
+        "\n",
+        "By the end of this worksheet, you will be able to:\n",
+        "\n",
+        "* Differentiate between functions and procedures.\n",
+        "* Identify the basic structure of subprograms.\n",
+        "* Create functions and procedures in Python.\n",
+        "* Understand the concept of recursion.\n",
+        "* Implement simple recursive functions.\n",
+        "\n",
+        "\n",
+        "\n",
+        "# Part 1. Reviewing Functions\n",
+        "\n",
+        "Observe the following code and execute it.\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "rb0rRCyX3F1G"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "z9UQEveh3DaF",
+        "outputId": "367eff0f-4f9f-4afa-8a09-085a4850fd97"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "88.33333333333333\n"
+          ]
+        }
+      ],
+      "source": [
+        "def calculate_final_grade(exam1, exam2, project):\n",
+        "  return (exam1 + exam2 + project) / 3\n",
+        "\n",
+        "final_grade = calculate_final_grade(85, 92, 88)\n",
+        "print(final_grade)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "\n",
+        "\n",
+        "### Reflection Questions\n",
+        "\n",
+        "1. What value does the function return?\n",
+        "\n",
+        "---$88.33333333333333$\n",
+        "\n",
+        "2. Where is the result stored?\n",
+        "\n",
+        "---The returned result is stored in the variable named final_grade\n",
+        "\n",
+        "3. What would happen if the `return` statement were removed?\n",
+        "\n",
+        "---If the return keyword is removed, the function will still perform the addition and division internally,\n",
+        "\n",
+        "\n",
+        "\n",
+        "# Part 2. What Is a Procedure?\n",
+        "\n",
+        "In structured programming, there are two main types of subprograms:\n",
+        "\n",
+        "## Function\n",
+        "\n",
+        "A function performs a task and returns a value.\n",
+        "\n",
+        "Example:\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "Uev4QB033YT7"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def calculate_area(base, height):\n",
+        "    return base * height\n",
+        "\n",
+        "area = calculate_area(5, 4)\n",
+        "\n",
+        "print(area)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "-cjjtxMz4WPZ",
+        "outputId": "65206811-05b0-4588-85d1-86871311bc12"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "20\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "\n",
+        "\n",
+        "## Procedure\n",
+        "\n",
+        "A procedure performs an action but does not return a value.\n",
+        "\n",
+        "Example:\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "3YjmDL6W4Wl8"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def display_menu():\n",
+        "    print(\"1. Add\")\n",
+        "    print(\"2. Subtract\")\n",
+        "    print(\"3. Exit\")\n",
+        "\n",
+        "display_menu()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "5F8uiSdg4gp6",
+        "outputId": "97c72994-2751-4005-fb34-ce31cb4074f1"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "1. Add\n",
+            "2. Subtract\n",
+            "3. Exit\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "\n",
+        "\n",
+        "### Activity 1\n",
+        "\n",
+        "Execute the following code.\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "MalkvvE44g1z"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def greet(name):\n",
+        "    print(\"Hello\", name)\n",
+        "\n",
+        "result = greet(\"Anna\")\n",
+        "\n",
+        "print(result)"
+      ],
+      "metadata": {
+        "id": "VqPmkmBc4sbk"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "\n",
+        "\n",
+        "### Questions\n",
+        "\n",
+        "1. What appears first on the screen?\n",
+        "\n",
+        "---Hello Anna\n",
+        "\n",
+        "2. What is stored in the variable `result`?\n",
+        "\n",
+        "---The value None is stored in the variable result\n",
+        "\n",
+        "3. Does the subprogram return a value?\n",
+        "\n",
+        "---yes, but it returns an implicit value\n",
+        "\n",
+        "\n",
+        "\n",
+        "# Part 3. Identifying Functions and Procedures\n",
+        "\n",
+        "Analyze each subprogram.\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "7kRtfUC24sqW"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "```python\n",
+        "def get_name():\n",
+        "    return input(\"Name: \")\n",
+        "\n",
+        "def print_report():\n",
+        "    print(\"Report generated\")\n",
+        "\n",
+        "def calculate_average(a, b, c):\n",
+        "    return (a + b + c) / 3\n",
+        "\n",
+        "def display_message():\n",
+        "    print(\"Welcome\")\n",
+        "```\n",
+        "\n",
+        "Complete the table.\n",
+        "\n",
+        "| Subprogram        | Function or Procedure |\n",
+        "| ----------------- | --------------------- |\n",
+        "| get_name          |    function           |\n",
+        "| print_report      |     procedure         |\n",
+        "| calculate_average |    function           |\n",
+        "| display_message   |     procedure         |\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "# Part 4. Creating Procedures\n",
+        "\n",
+        "## Guided Exercise\n",
+        "\n",
+        "Complete the following procedure.\n",
+        "\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "bA_cZ2ip42KG"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def display_header():\n",
+        "\n",
+        "    print(\"University\")\n",
+        "    print(\"Structured Programming\")\n",
+        "    print(\"Subprogram Practice\")\n",
+        "\n",
+        "display_header()"
+      ],
+      "metadata": {
+        "id": "aZtYvaRz5GGm",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "f75cd403-7b5f-4c19-c4b0-defc9c352d77"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "University\n",
+            "Structured Programming\n",
+            "Subprogram Practice\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "\n",
+        "Expected output:\n",
+        "\n",
+        "```text\n",
+        "University\n",
+        "Structured Programming\n",
+        "Subprogram Practice\n",
+        "```\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## Challenge\n",
+        "\n",
+        "Create a procedure called `display_table_of_5()` that prints the multiplication table of 5.\n",
+        "\n",
+        "Expected output:\n",
+        "\n",
+        "```text\n",
+        "5 x 1 = 5\n",
+        "5 x 2 = 10\n",
+        "...\n",
+        "5 x 10 = 50\n",
+        "```\n",
+        "\n",
+        "\n",
+        "\n",
+        "# Part 5. Creating Functions\n",
+        "\n",
+        "## Guided Exercise\n",
+        "\n",
+        "Complete the following function.\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "B43HD9R35GS6"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def square(number):\n",
+        "\n",
+        "  return number * number\n",
+        "\n",
+        "print(square(4))\n"
+      ],
+      "metadata": {
+        "id": "z83dOt6q5Q_6",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "5fc6394f-ec08-4c08-97e4-b0bd5df989b9"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "16\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "\n",
+        "\n",
+        "Expected output:\n",
+        "\n",
+        "```text\n",
+        "16\n",
+        "```\n",
+        "\n",
+        "\n",
+        "\n",
+        "## Challenge\n",
+        "\n",
+        "Create a function called `is_even(number)`.\n",
+        "\n",
+        "The function must return:\n",
+        "\n",
+        "* True if the number is even.\n",
+        "* False if the number is odd.\n",
+        "\n",
+        "Test your function:\n",
+        "\n",
+        "```python\n",
+        "print(is_even(8))\n",
+        "print(is_even(7))\n",
+        "```\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "b2S5QN7a5RJ4"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def is_even(number):\n",
+        "    if number % 2 == 0:\n",
+        "        return True\n",
+        "    else:\n",
+        "        return False\n",
+        "\n",
+        "print(is_even(8))\n",
+        "print(is_even(7))"
+      ],
+      "metadata": {
+        "id": "Dyk6PYWF5grQ",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "16e316a0-c346-4335-9738-6fb30d135be2"
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "True\n",
+            "False\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "\n",
+        "\n",
+        "# Part 6. Introduction to Recursion\n",
+        "\n",
+        "A recursive function is a function that calls itself.\n",
+        "\n",
+        "Observe the following example.\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "XCMGR9Kq5g08"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def countdown(n):\n",
+        "\n",
+        "    print(n)\n",
+        "\n",
+        "    if n > 1:\n",
+        "        countdown(n - 1)\n",
+        "\n",
+        "countdown(5)"
+      ],
+      "metadata": {
+        "id": "myf2zRNx5nRB",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "4a3e6d2f-1058-44c6-eab3-9c653b1dc55b"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "5\n",
+            "4\n",
+            "3\n",
+            "2\n",
+            "1\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "\n",
+        "\n",
+        "Execute the program.\n",
+        "\n",
+        "### Questions\n",
+        "\n",
+        "1. Which numbers are displayed?\n",
+        "\n",
+        "---5, 4, 3, 2, and 1\n",
+        "\n",
+        "2. What happens when `n` becomes 1?\n",
+        "\n",
+        "---print(n) runs and displays 1 on the screen , 1 is not greater than 1, this condition evaluates to False\n",
+        "\n",
+        "3. Why does the program stop?\n",
+        "\n",
+        "---because it hits what is known in recursion as the base case.\n",
+        "\n",
+        "\n",
+        "\n",
+        "# Part 7. Understanding the Base Case\n",
+        "\n",
+        "Every recursive function needs a condition that stops the recursion.\n",
+        "\n",
+        "Observe the following example.\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "BbZM85in5nfr"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def say_hello(n):\n",
+        "\n",
+        "    if n == 0:\n",
+        "        return\n",
+        "\n",
+        "    print(\"Hello\")\n",
+        "    say_hello(n - 1)\n",
+        "\n",
+        "say_hello(4)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "C2q7sCMi5uUn",
+        "outputId": "0d360844-5699-4d00-e2cf-820d13ed85da"
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Hello\n",
+            "Hello\n",
+            "Hello\n",
+            "Hello\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Questions\n",
+        "\n",
+        "1. How many times is \"Hello\" printed?\n",
+        "\n",
+        "---4 times\n",
+        "\n",
+        "2. What is the base case?\n",
+        "\n",
+        "---if n == 0:\n",
+        "\n",
+        "3. What would happen if the `if` statement were removed?\n",
+        "\n",
+        "---the function would lose its base case and have no way to stop.\n",
+        "\n",
+        "\n",
+        "# Part 8. Building a Recursive Function\n",
+        "\n",
+        "Complete the following function.\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "1INjGqzv5ujn"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def count_to_one(n):\n",
+        "\n",
+        "    print(n)\n",
+        "\n",
+        "    if n > 1:\n",
+        "        count_to_one(n - 1)\n",
+        "\n",
+        "count_to_one(10)"
+      ],
+      "metadata": {
+        "id": "fMDBFrk055f1",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "df868836-37c6-4fea-bcfd-123f3d8a316e"
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "10\n",
+            "9\n",
+            "8\n",
+            "7\n",
+            "6\n",
+            "5\n",
+            "4\n",
+            "3\n",
+            "2\n",
+            "1\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Observe carefully how the function calls itself.\n",
+        "\n",
+        "### Reflection\n",
+        "\n",
+        "What is the role of the statement:\n",
+        "\n",
+        "```python\n",
+        "count_to_one(n - 1)\n",
+        "```\n",
+        "\n",
+        "*Answer*\n",
+        "---Its primary role is to drive the program forward by breaking the problem down into a smaller, simpler version of itself.\n",
+        "\n",
+        "\n",
+        "# Part 9. First Recursive Mathematical Example\n",
+        "\n",
+        "The factorial of a number is defined as:\n",
+        "\n",
+        "```text\n",
+        "4! = 4 × 3 × 2 × 1\n",
+        "```\n",
+        "\n",
+        "Observe the following code.\n",
+        "\n",
+        "```python\n",
+        "def factorial(n):\n",
+        "\n",
+        "    if n == 1:\n",
+        "        return 1\n",
+        "\n",
+        "    return n * factorial(n - 1)\n",
+        "\n",
+        "print(factorial(4))\n",
+        "```\n",
+        "\n",
+        "### Activity\n",
+        "\n",
+        "Complete the table.\n",
+        "\n",
+        "| Function Call | Waiting For |\n",
+        "| ------------- | ----------- |\n",
+        "| factorial(4)  |    4 * factorial(3)   |\n",
+        "| factorial(3)  | 3 * factorial(2)            |\n",
+        "| factorial(2)  |      factorial       |\n",
+        "| factorial(1)  | This is the base case            |\n",
+        "\n",
+        "---\n",
+        "\n",
+        "### Reflection\n",
+        "\n",
+        "Why does the function eventually stop?\n",
+        "\n",
+        "---The Decrementing Argument\n",
+        "\n",
+        "---Triggering the Base Case\n",
+        "\n",
+        "---Collapsing the \"Stack\"\n",
+        "\n",
+        "# Part 10. Final Challenge\n",
+        "\n",
+        "Create a program that includes:\n",
+        "\n",
+        "## Procedures\n",
+        "\n",
+        "* display_menu()\n",
+        "* say_goodbye()\n",
+        "\n",
+        "## Functions\n",
+        "\n",
+        "* calculate_area()\n",
+        "* calculate_average()\n",
+        "\n",
+        "## Recursive Function\n",
+        "\n",
+        "* countdown()\n",
+        "\n",
+        "The menu should allow the user to select an option.\n",
+        "\n",
+        "```text\n",
+        "1. Calculate Area\n",
+        "2. Calculate Average\n",
+        "3. Countdown\n",
+        "4. Exit\n",
+        "```\n",
+        "\n",
+        "### Requirements\n",
+        "\n",
+        "* Use at least two procedures.\n",
+        "* Use at least two functions that return values.\n",
+        "* Use one recursive function.\n",
+        "* Organize the program into subprograms.\n",
+        "\n",
+        "\n",
+        "1. What is the difference between a function and a procedure?\n",
+        "\n",
+        "---Function: A subprogram designed to perform a calculation and explicitly return a value back to the main program using the return keyword\n",
+        "\n",
+        "---Procedure: A subprogram that performs a sequence of instructions or actions (like printing text to the screen) but does not return a value back to the program\n",
+        "\n",
+        "2. What is recursion?\n",
+        "\n",
+        "---Recursion is a programming technique where a subprogram calls itself in order to solve a problem.\n",
+        "\n",
+        "---\n",
+        "\n",
+        "3. Why does every recursive function need a base case?\n",
+        "\n",
+        "---A base case is the conditional \"stop signal\" inside a recursive function. Without it, the function would keep calling itself infinitely, consuming more and more computer memory\n",
+        "\n",
+        "---\n",
+        "\n",
+        "4. Which topic was most difficult for you?\n",
+        "\n",
+        "---Recursion\n",
+        "\n",
+        "---"
+      ],
+      "metadata": {
+        "id": "MRrXB0Ec55pr"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def display_menu():\n",
+        "    print(\"        MAIN MENU        \")\n",
+        "    print(\"1. Calculate Area (Circle)\")\n",
+        "    print(\"2. Calculate Average (3 numbers)\")\n",
+        "    print(\"3. Countdown\")\n",
+        "    print(\"4. Exit\")\n",
+        "\n",
+        "def say_goodbye():\n",
+        "    \"\"\"Displays a closing message when the program ends.\"\"\"\n",
+        "    print(\"\\nThank you for using the program. Goodbye!\")\n",
+        "\n",
+        "\n",
+        "\n",
+        "def calculate_area(radius):\n",
+        "    \"\"\"Calculates and returns the area of a circle given its radius.\"\"\"\n",
+        "    area = 3.14159 * (radius ** 2)\n",
+        "    return area\n",
+        "\n",
+        "def calculate_average(num1, num2, num3):\n",
+        "    \"\"\"Calculates and returns the average of three numbers.\"\"\"\n",
+        "    return (num1 + num2 + num3) / 3\n",
+        "\n",
+        "\n",
+        "\n",
+        "def countdown(n):\n",
+        "    print(n)\n",
+        "    if n == 1:\n",
+        "        print(\"end!\")\n",
+        "        return\n",
+        "    else:\n",
+        "        countdown(n - 1)\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "def main():\n",
+        "    while True:\n",
+        "        display_menu()\n",
+        "        choice = input(\"Select an option (1-4): \")\n",
+        "\n",
+        "        if choice == '1':\n",
+        "            try:\n",
+        "                rad = float(input(\"Enter the radius of the circle: \"))\n",
+        "                result = calculate_area(rad)\n",
+        "                print(f\"The area of the circle is: {result:.2f}\")\n",
+        "            except ValueError:\n",
+        "                print(\"Invalid input. Please enter a number.\")\n",
+        "\n",
+        "        elif choice == '2':\n",
+        "            try:\n",
+        "                n1 = float(input(\"Enter first number: \"))\n",
+        "                n2 = float(input(\"Enter second number: \"))\n",
+        "                n3 = float(input(\"Enter third number: \"))\n",
+        "                avg = calculate_average(n1, n2, n3)\n",
+        "                print(f\"The average of the three numbers is: {avg:.2f}\")\n",
+        "            except ValueError:\n",
+        "                print(\"Invalid input. Please enter numbers only.\")\n",
+        "\n",
+        "        elif choice == '3':\n",
+        "            try:\n",
+        "                start_num = int(input(\"Enter a positive starting integer for the countdown: \"))\n",
+        "                if start_num > 0:\n",
+        "                    print(\"\\nStarting Countdown:\")\n",
+        "                    countdown(start_num)\n",
+        "                else:\n",
+        "                    print(\"Please enter a number greater than 0.\")\n",
+        "            except ValueError:\n",
+        "                print(\"Invalid input. Please enter an integer.\")\n",
+        "\n",
+        "        elif choice == '4':\n",
+        "            say_goodbye()\n",
+        "            break\n",
+        "\n",
+        "        else:\n",
+        "            print(\"Invalid choice. Please select an option between 1 and 4.\")\n",
+        "\n",
+        "if __name__ == \"__main__\":\n",
+        "    main()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "l63gmHqbIdr8",
+        "outputId": "8ed4bada-a765-4865-ba15-f6593cc82f5a"
+      },
+      "execution_count": 20,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "        MAIN MENU        \n",
+            "1. Calculate Area (Circle)\n",
+            "2. Calculate Average (3 numbers)\n",
+            "3. Countdown\n",
+            "4. Exit\n",
+            "Select an option (1-4): 3\n",
+            "Enter a positive starting integer for the countdown: 5\n",
+            "\n",
+            "Starting Countdown:\n",
+            "5\n",
+            "4\n",
+            "3\n",
+            "2\n",
+            "1\n",
+            "end!\n",
+            "        MAIN MENU        \n",
+            "1. Calculate Area (Circle)\n",
+            "2. Calculate Average (3 numbers)\n",
+            "3. Countdown\n",
+            "4. Exit\n",
+            "Select an option (1-4): 4\n",
+            "\n",
+            "Thank you for using the program. Goodbye!\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# References\n",
+        "\n",
+        "Downey, A. (2024). *Think Python: How to Think Like a Computer Scientist*. Green Tea Press.\n",
+        "\n",
+        "Python Software Foundation. *Python Documentation*. Available at: https://docs.python.org/\n",
+        "\n",
+        "Gaddis, T. (2023). *Starting Out with Python* (6th Edition). Pearson.\n",
+        "\n",
+        "\n",
+        "# Submission Instructions\n",
+        "\n",
+        "To receive credit for this activity, complete the following steps:\n",
+        "\n",
+        "1. Make a copy of the notebook and save it in your personal repository.\n",
+        "\n",
+        "2. Complete all sections of the worksheet:\n",
+        "\n",
+        "   * Run every example provided.\n",
+        "   * Answer all reflection questions.\n",
+        "   * Complete all guided exercises.\n",
+        "   * Complete all challenge activities.\n",
+        "\n",
+        "3. Verify that all code cells execute correctly before submitting.\n",
+        "\n",
+        "4. Once the notebook is finished, mark the assignment as **Completed** in Google Classroom.\n",
+        "\n",
+        "\n",
+        "\n",
+        "# Additional Practice\n",
+        "\n",
+        "You are encouraged to improve your solutions by adding:\n",
+        "\n",
+        "* Input validation\n",
+        "* Error handling\n",
+        "* Additional menu options\n",
+        "* More descriptive output messages\n",
+        "\n",
+        "These improvements are optional but highly recommended as a way to strengthen your programming skills and gain additional practice with structured programming concepts.\n"
+      ],
+      "metadata": {
+        "id": "9kGEMbLd6WzT"
+      }
+    }
+  ]
+}
