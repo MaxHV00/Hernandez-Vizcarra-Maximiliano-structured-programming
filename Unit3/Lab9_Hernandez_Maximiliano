@@ -1,0 +1,273 @@
+# -*- coding: utf-8 -*-
+"""Lab_9_Recursive_Programming.ipynb
+
+# Structured Programming
+# Laboratory 9. Introduction to Recursive Programming
+Student's name: Maximiliano Hernandez Vizcarra
+Grade & Group: 3A
+Date: 26/06/2026
+
+## Learning Objectives
+
+After completing this laboratory, you will be able to:
+
+- define recursion and identify situations where it can be applied;
+- distinguish between a base case and a recursive case;
+- trace the execution of a recursive function;
+- write simple recursive functions in Python;
+- compare iterative and recursive approaches to solving problems.
+
+# 1. Introduction
+
+A function that calls itself is called a **recursive function**.
+
+Recursion is based on the following idea:
+
+> A complex problem can sometimes be solved by reducing it to a smaller version of the same problem.
+
+This process continues until a simple case is reached.
+
+## The Two Essential Components of Recursion
+
+### Base Case
+The condition that stops the recursion.
+
+### Recursive Case
+The part of the function that calls itself using a smaller version of the problem.
+
+### General Form
+```python
+def function(problem):
+    if simple_case:
+        # base case
+        do_something
+    else:
+        # recursive case
+        function(smaller_problem)
+```
+
+# 2. First Recursive Program
+"""
+
+def countdown(n):
+    if n == 0:
+        print("Liftoff!")
+    else:
+        print(n)
+        countdown(n - 1)
+
+countdown(5)
+
+"""### Questions
+1. Which statement makes this function recursive?
+The line where the function calls itself: countdown(n - 1).
+
+2. What is the base case?
+When n == 0.
+
+3. Why does the function eventually stop?
+Because n decreases each time until it reaches 0.
+
+4. What value is passed during each new function call?
+n - 1.
+
+# 3. Understanding Function Calls
+
+When a recursive function calls itself, Python temporarily pauses the current function call and starts executing the new one.
+
+After the base case is reached, the function calls finish one by one in reverse order. This behavior is known as the **call stack**.
+"""
+
+def explore(level):
+    print("Entering level", level)
+
+    if level > 1:
+        explore(level - 1)
+
+    print("Leaving level", level)
+
+explore(3)
+
+"""### Before running the program
+Predict the output.
+Entering level 3, Entering level 2, Entering level 1, Leaving level 1, Leaving level 2, Leaving level 3.
+
+### After running the program
+Write the actual output.
+Entering level 3
+Entering level 2
+Entering level 1
+Leaving level 1
+Leaving level 2
+Leaving level 3
+
+### Questions
+1. Which message appears first?
+"Entering level 3".
+
+2. Which message appears last?
+"Leaving level 3".
+
+3. Why are the 'Leaving' messages printed in reverse order?
+Because each call has to finish before returning to the previous one, so they close in the opposite order they opened.
+
+# 4. Tracing Recursive Calls
+
+Complete the diagram:
+
+```text
+explore(4)
+|
+└── explore(3)
+      |
+      └── explore(2)
+             |
+             └── explore(1)
+```
+
+# 5. Returning Values Recursively
+"""
+
+def treasures(level):
+    if level == 0:
+        return 0
+    else:
+        return 1 + treasures(level - 1)
+
+treasures(4)
+
+"""Trace the execution:
+
+```text
+treasures(4)
+= 1 + treasures(3)
+= 1 + 1 + treasures(2)
+= 1 + 1 + 1 + treasures(1)
+= 1 + 1 + 1 + 1 + treasures(0)
+= 1 + 1 + 1 + 1 + 0 = 4
+```
+
+# 6. Recursive Summation
+"""
+
+def coins(level):
+    if level == 0:
+        return 0
+    else:
+        return level + coins(level - 1)
+
+coins(5)
+
+"""Determine the value returned by `coins(5)` and show every step of the recursive process.
+
+```text
+coins(5)
+= 5 + coins(4)
+= 5 + 4 + coins(3)
+= 5 + 4 + 3 + coins(2)
+= 5 + 4 + 3 + 2 + coins(1)
+= 5 + 4 + 3 + 2 + 1 + coins(0)
+= 5 + 4 + 3 + 2 + 1 + 0 = 15
+```
+
+# 7. Writing a Recursive Function
+"""
+
+# Complete the function
+
+def countdown(n):
+    if n == 0:
+        print("Done!")
+    else:
+        print(n)
+        countdown(n - 1)
+
+countdown(4)
+
+"""Expected output:
+
+```text
+4
+3
+2
+1
+Done!
+```
+
+# 8. Common Errors in Recursive Programming
+"""
+
+def mystery(n):
+    print(n)
+    mystery(n - 1)
+
+# mystery(5)  # commented to avoid crashing the program
+
+"""### Questions
+1. Does the function stop?
+No, it never stops because it has no base case.
+
+2. What error is eventually generated?
+RecursionError: maximum recursion depth exceeded.
+
+3. Why does this error occur?
+Because the function keeps calling itself forever and Python runs out of stack space.
+
+4. How can the function be corrected?
+By adding a base case, for example: if n == 0: return.
+
+# 9. Recursion versus Iteration
+
+| Iteration | Recursion |
+|-----------|-----------|
+| Uses loops. | Uses function calls. |
+| Usually requires less memory. | Often produces simpler solutions. |
+| Execution is generally faster. | Can model naturally recursive problems. |
+
+Examples of naturally recursive problems include:
+- traversing folders inside folders;
+- exploring menus and submenus;
+- searching family trees;
+- processing nested data structures.
+
+# Final Reflection
+
+1. In your own words, what is recursion?
+Recursion is when a function solves a problem by calling itself with a smaller version of the same problem.
+
+2. What are the two essential components of every recursive function?
+The base case and the recursive case.
+
+3. Why is the base case necessary?
+Because without it the function would call itself forever and never stop.
+
+4. What did you find most difficult about recursive thinking?
+Following the order in which the calls return and understanding the call stack.
+
+## References
+
+1. Gaddis, T. (2023). *Starting Out with Python* (6th ed.). Pearson.
+
+2. Zelle, J. M. (2017). *Python Programming: An Introduction to Computer Science* (3rd ed.). Franklin, Beedle & Associates.
+
+3. Downey, A. (2024). *Think Python: How to Think Like a Computer Scientist* (3rd ed.). O'Reilly Media.
+
+4. Liang, Y. D. (2024). *Introduction to Programming Using Python* (2nd ed.). Pearson.
+
+5. Python Software Foundation. (2026). *The Python Tutorial*. Retrieved from:
+https://docs.python.org/3/tutorial/
+
+##  Submission Instructions
+
+1. Complete all sections of this laboratory notebook.
+
+2. Rename the notebook using the following format: Lab09_LastName_FirstName.ipynb
+
+3. Save the completed notebook.
+
+4. Upload a copy of this notebook to your personal course repository.
+
+6. Verify that the notebook is available in your remote repository.
+
+7. Return to Google Classroom and mark the assignment as **Completed**.
+"""
